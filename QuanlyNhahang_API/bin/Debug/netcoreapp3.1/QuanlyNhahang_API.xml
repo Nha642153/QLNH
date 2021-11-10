@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>QuanlyNhahang_API</name>
+    </assembly>
+    <members>
+        <member name="M:QuanlyNhahang_API.Controllers.GuestController.Post(QuanlyNhahang_API.Model.Guest)">
+            <summary>
+            Them Nha hang
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.GuestController.Put(QuanlyNhahang_API.Model.Guest)">
+            <summary>
+            Chinh sua (put)
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.RestaurantController.Post(QuanlyNhahang_API.Model.Restaurant)">
+            <summary>
+            Them Nha hang
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.RestaurantController.Put(QuanlyNhahang_API.Model.Restaurant)">
+            <summary>
+            Chinh sua (put)
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.RoleController.Get(System.Int32)">
+            <summary>
+            Lay Quyen voi Id
+            </summary>
+            <returns>Danh sach Role</returns>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.RoleController.Post(QuanlyNhahang_API.Model.Role)">
+            <summary>
+            Them Quyen
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.StatusController.Post(QuanlyNhahang_API.Model.Status)">
+            <summary>
+            Them Nha hang
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.StatusController.Put(QuanlyNhahang_API.Model.Status)">
+            <summary>
+            Chinh sua (put)
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.UserController.Post(QuanlyNhahang_API.Model.User)">
+            <summary>
+            Them Quyen
+             </summary>
+        </member>
+    </members>
+</doc>

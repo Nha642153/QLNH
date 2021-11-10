@@ -1,0 +1,30 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31702.278
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "QuanlyNhahang_API", "QuanlyNhahang_API.csproj", "{36697B3B-6A19-47C3-B52D-6B1D8E1D880B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D565169D-8374-4CE1-AFDD-27463F322406}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{36697B3B-6A19-47C3-B52D-6B1D8E1D880B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36697B3B-6A19-47C3-B52D-6B1D8E1D880B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36697B3B-6A19-47C3-B52D-6B1D8E1D880B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36697B3B-6A19-47C3-B52D-6B1D8E1D880B}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FCED009D-1977-4AD7-90FD-531EE3EA6477}
+	EndGlobalSection
+EndGlobal
