@@ -43,6 +43,7 @@ import { HomeComponent } from './home/home.component';
 
 import { FormsModule } from '@angular/forms';
 import { StatusComponent } from './status/status.component';
+import { UserComponent } from './user/user.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { StatusComponent } from './status/status.component';
     RestaurantComponent,
      RoleComponent,
      HomeComponent,
-     StatusComponent
+     StatusComponent,
+     UserComponent
   ],
   imports: [
     BrowserModule,

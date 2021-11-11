@@ -6,6 +6,7 @@ import { PageNotFoundComponent } from './page-not-found/page-not-found.component
 import { RestaurantComponent } from './restaurant/restaurant.component';
 import { RoleComponent } from './role/role.component';
 import {StatusComponent} from './status/status.component';
+import { UserComponent } from './user/user.component';
 
 
 const routes: Routes = [
@@ -13,6 +14,7 @@ const routes: Routes = [
   {path: 'restaurant',component:RestaurantComponent},
   {path:'role',component:RoleComponent},
   {path:'status',component:StatusComponent},
+  {path:'user', component:UserComponent},
   {path:'',component:HomeComponent},
   {path:'**',component:PageNotFoundComponent},
 ];

@@ -21,45 +21,20 @@ export class AppComponent implements OnInit {
             command:()=> this.router.navigate(['/restaurant'])       
         },
         {
-            label:'Quyền',
-            icon:'pi pi-fw pi-user-edit',
-            command:()=> this.router.navigate(['/role'])
-    
-        },
-        {
             label:'Users',
             icon:'pi pi-fw pi-user',
             items:[
                 {
-                    label:'New',
+                    label:'Chức vụ',
                     icon:'pi pi-fw pi-user-plus',
-
+                    command:()=> this.router.navigate(['/user'])
                 },
                 {
-                    label:'Delete',
-                    icon:'pi pi-fw pi-user-minus',
-
+                    label:'Quyền',
+                    icon:'pi pi-fw pi-user-edit',
+                    command:()=> this.router.navigate(['/role'])
                 },
-                {
-                    label:'Search',
-                    icon:'pi pi-fw pi-users',
-                    items:[
-                    {
-                        label:'Filter',
-                        icon:'pi pi-fw pi-filter',
-                        items:[
-                            {
-                                label:'Print',
-                                icon:'pi pi-fw pi-print'
-                            }
-                        ]
-                    },
-                    {
-                        icon:'pi pi-fw pi-bars',
-                        label:'List'
-                    }
-                    ]
-                }
+                
             ]
         },
         {

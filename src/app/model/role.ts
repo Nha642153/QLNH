@@ -5,4 +5,5 @@ export interface Role{
     created:Date;
     updated:Date;
     deleted:boolean;
+    
 }

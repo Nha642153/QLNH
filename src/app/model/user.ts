@@ -1,21 +1,19 @@
-export interface Status{
+export interface User{
     id:number,
-    name: string,
+    userName: string,
     description:string,
     phone:string,
     address:string,
     created:Date,
     updated:Date,
     deleted:boolean,
-    restaurantDTO:{
-      id:number;
-      name: string;
-      description:string;
-      phone:string;
-      address:string;
-      created:Date;
-      updated:Date;
-      deleted:boolean;
+    role:{
+        id:number;
+        name: string;
+        descripion:string;
+        created:Date;
+        updated:Date;
+        deleted:boolean;
     },
     createdUser:{
         id:number,

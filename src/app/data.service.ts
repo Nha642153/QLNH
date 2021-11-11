@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { Restaurant } from './model/retaurant';
 import { Role } from './model/role';
 import { Status } from './model/status';
+import { User } from './model/user';
 
 @Injectable({
   providedIn: 'root'
@@ -57,7 +58,7 @@ export class DataService {
     created:new Date(),
     updated:new Date(),
     deleted:false,
-    restaurant:{
+    restaurantDTO:{
       id:0,
       name:'',
       description:'',
@@ -66,6 +67,44 @@ export class DataService {
       created:new Date(),
       updated:new Date(),
       deleted:false,
+    },
+    createdUser:{
+      id:0,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    },
+    updatedUser:{
+      id:1,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    }
+  };
+  public newUser:User={
+    id:0,
+    userName: '',
+    description:'',
+    phone:'',
+    address:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+    role:{
+      id:0,
+      name: '',
+      descripion:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false
     },
     createdUser:{
       id:0,
@@ -120,5 +159,17 @@ export class DataService {
   public putStatus(payload:Status):Observable<Status>{
     const url=`${this.REST_APIs}/status`;
     return this.httpClient.put<Status>(url, payload,this.httpOptions);
+  }
+  public getAllUser():Observable<User[]>{
+    const url=`${this.REST_APIs}/user`;
+    return this.httpClient.get<User[]>(url,this.httpOptions);
+  }
+  public postUser(payload:User):Observable<User>{
+    const url=`${this.REST_APIs}/user`;
+    return this.httpClient.post<User>(url, payload,this.httpOptions);
+  }
+  public putUser(payload:User):Observable<User>{
+    const url=`${this.REST_APIs}/user`;
+    return this.httpClient.put<User>(url, payload,this.httpOptions);
   }
 }

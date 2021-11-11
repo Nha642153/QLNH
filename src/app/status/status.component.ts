@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import {Restaurant} from '../model/retaurant';
+import { Restaurant} from '../model/retaurant';
 import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { DataService } from '../data.service';
-import {Status} from '../model/status';
+import { Status} from '../model/status';
 
 @Component({
   selector: 'app-status',
@@ -59,7 +59,7 @@ export class StatusComponent implements OnInit {
     }else{
    console.log('openNew: ');
    this.status=Object.assign({},this.dataService.newStatus);
-    this.status.restaurant.id=this.selectedRestaurant.id;
+    this.status.restaurantDTO.id=this.selectedRestaurant.id;
     
    this.StatusDialog = true;
     }
@@ -73,13 +73,13 @@ export class StatusComponent implements OnInit {
   public deleteStatus(Status:Status):void{
     console.log('delete Status: ',Status);
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + Status.name + '?',
+      message: 'Are you sure you want to booked ' + Status.name + '?',
       header: 'Confirm',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
           Status.deleted=true;
           this.dataService.putStatus(Status).subscribe(data=>{
-            console.log('da xoa: ',data);
+            console.log('da cap nhat: ',data);
             this.loadStatus();
             this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
           });
@@ -122,7 +122,7 @@ export class StatusComponent implements OnInit {
         (data)=>{
         console.log('return data: ',data);
         this.displayStatus=this.statuss.filter(
-          (status)=>status.restaurant.id===this.selectedRestaurant?.id);
+          (status)=>status.restaurantDTO.id===this.selectedRestaurant?.id);
         this.statuss.push(data);
         this.hideDialog(false,true);
       },
@@ -149,7 +149,8 @@ export class StatusComponent implements OnInit {
   public onRestaurantChange(event:any):void{
     const restaurant:Restaurant=event;
     console.log('on change= ',restaurant);
-    this.displayStatus=this.statuss.filter(st=>st.restaurant.id===restaurant.id);
+    
+      this.displayStatus=this.statuss.filter(st=>st.restaurantDTO?.id===restaurant?.id);
     
     console.log('on change this.displayRestaurant= ', this.displayStatus);
   
