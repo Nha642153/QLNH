@@ -1,9 +1,9 @@
 export interface Role{
     id:number;
     name: string;
-    descripion:string;
+    description:string;
     created:Date;
     updated:Date;
     deleted:boolean;
-    
+   
 }

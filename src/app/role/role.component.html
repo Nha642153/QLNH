@@ -1,1 +1,71 @@
-<div>{{roles|json}}</div>
+<p-toast></p-toast>
+<div *ngIf="loading" class="lds-roller" style="font-size: 200%; left: 40%; margin-top:20%"><div>Loading Data</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="card" *ngIf="!loading">
+    <p-toolbar styleClass="p-mb-4">
+       
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Thêm Quyền" icon="pi pi-plus" class="p-button-success p-mr-1" (click)="openNew()"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value,'contains')" placeholder="Search...."/>
+            </span>
+        </ng-template>
+   </p-toolbar>
+   <p-table #dt id="dataTable" 
+            [value]="roles"
+            [rows]="10" [paginator]="true" 
+            [globalFilterFields]="['name','desciption']"
+            [rowHover]="true"
+            dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Tên <p-sortIcon field="name"></p-sortIcon> </th>           
+            <th pSortableColumn="desciption">Nội dung <p-sortIcon field="description"></p-sortIcon> </th>
+            <th pSortableColumn="created">Ngay tạo <p-sortIcon field="created"></p-sortIcon> </th>
+            <th pSortableColumn="updated">Ngày chỉnh <p-sortIcon field="updated"></p-sortIcon> </th>
+            <th pSortableColumn="deleted">Đã xóa<p-sortIcon field="deleted"></p-sortIcon> </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-role>
+        <tr>
+            <td>{{role.name}}</td>
+            <td>{{role.description}}</td>
+            <td>{{role.created | date:"dd/MM/yyyy"}}</td>
+            <td>{{role.updated | date:"dd/MM/yyyy"}}</td>
+            <td>{{role.deleted}}</td>
+            <td>
+                <button pButton pRipple icon="pi pi-check" class="p-button-rounded p-button-warning p-mr-2" (click)="deleteRole(role)"></button>
+                &nbsp;
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editRole(role)"></button>
+            </td>
+        </tr>
+    </ng-template>
+   </p-table>
+</div>
+<p-dialog
+ [(visible)]="RoleDialog"
+ [style]="{width: '450px'}"
+ header="Status Details"
+ [modal]="true"
+ styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="role.name" required autofocus />
+                <small class="p-invalid" *ngIf="!role.name">Name is required.</small>
+            </div>
+            <div class="p-field">
+                <label for="description">Nội dung</label>
+                <textarea id="description" pInputTextarea [(ngModel)]="role.description" required rows="3" cols="20"></textarea>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveStatus()"></button>
+        </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>    

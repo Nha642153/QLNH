@@ -127,6 +127,15 @@ export class DataService {
       updatedUserId:0,
     }
   };
+  public newRole:Role={
+    id:0,
+    name:'',
+    description:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+    
+  };
   constructor(private httpClient:HttpClient) { }
   public getAllRestaurant():Observable<Restaurant[]>{
     const url=`${this.REST_APIs}/restaurant`;
@@ -144,9 +153,13 @@ export class DataService {
     const url=`${this.REST_APIs}/role`;
     return this.httpClient.get<Role[]>(url,this.httpOptions);
   }
-  public postRole(payload:Restaurant):Observable<Role>{
+  public postRole(payload:Role):Observable<Role>{
     const url=`${this.REST_APIs}/role`;
     return this.httpClient.post<Role>(url, payload,this.httpOptions);
+  }
+  public putRole(payload:Role):Observable<Role>{
+  const url=`${this.REST_APIs}/role`;
+  return this.httpClient.put<Role>(url, payload,this.httpOptions);
   }
   public getAllStatus():Observable<Status[]>{
     const url=`${this.REST_APIs}/status`;
