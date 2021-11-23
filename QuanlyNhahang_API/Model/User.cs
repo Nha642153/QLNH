@@ -10,7 +10,10 @@ namespace QuanlyNhahang_API.Model
         [Key]
         public int Id { get; set; }
         public string UserName { get; set; }
+        
         public string PassWord { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public string Description { get; set; }
@@ -23,5 +26,10 @@ namespace QuanlyNhahang_API.Model
         public IEnumerable<User> CreatedUser { get; set; }
         [NotMapped]
         public IEnumerable<User> UpdatedUser { get; set; }
+
+        public static implicit operator User(Catogory v)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

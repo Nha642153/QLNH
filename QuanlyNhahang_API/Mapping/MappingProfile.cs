@@ -15,13 +15,18 @@ namespace QuanlyNhahang_API.Mapping
             CreateMap<User, UserDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.UserName, opt => opt.MapFrom(src => src.UserName))
-                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
-                .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Role));
+                .ForMember(dest => dest.Phone, opt => opt.MapFrom(src => src.Phone))
+                .ForMember(dest => dest.Address, opt => opt.MapFrom(src => src.Address))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
+
             CreateMap<Role, RoleDTO>()
                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
-               .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description));
-            //.ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant));
+               .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+               .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created))
+               .ForMember(dest => dest.Updated, opt => opt.MapFrom(src => src.Updated))
+               .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted));
+        
             CreateMap<Restaurant, RestaurantDTO>()
                 .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
@@ -48,10 +53,32 @@ namespace QuanlyNhahang_API.Mapping
                 .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
                 .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
                 .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
-                
                 .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created))
                 .ForMember(dest => dest.Updated, opt => opt.MapFrom(src => src.Updated))
                 .ForMember(dest => dest.RestaurantDTO, opt => opt.MapFrom(src => src.Restaurant))
+                .ForMember(dest => dest.CreatedUser, opt => opt.MapFrom(src => src.CreatedUser))
+                .ForMember(dest => dest.UpdatedUser, opt => opt.MapFrom(src => src.UpdatedUser));
+            CreateMap<Unit, UnitDTO>()
+              .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+              .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+              .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+              .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
+              .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created))
+              .ForMember(dest => dest.Updated, opt => opt.MapFrom(src => src.Updated))
+              .ForMember(dest => dest.RestaurantDTO, opt => opt.MapFrom(src => src.Restaurant))
+              .ForMember(dest => dest.UnitType, opt => opt.MapFrom(src => src.UnitType))
+              .ForMember(dest => dest.CreatedUser, opt => opt.MapFrom(src => src.CreatedUser))
+              .ForMember(dest => dest.UpdatedUser, opt => opt.MapFrom(src => src.UpdatedUser));
+            CreateMap<Catogory, CatogoryDTO>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description))
+                .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
+                .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created))
+                .ForMember(dest => dest.Updated, opt => opt.MapFrom(src => src.Updated))
+                .ForMember(dest => dest.RestaurantDTO, opt => opt.MapFrom(src => src.Restaurant))
+                .ForMember(dest => dest.Children, opt => opt.MapFrom(src => src.Children))
+                .ForMember(dest => dest.Parent, opt => opt.MapFrom(src => src.Parent))
                 .ForMember(dest => dest.CreatedUser, opt => opt.MapFrom(src => src.CreatedUser))
                 .ForMember(dest => dest.UpdatedUser, opt => opt.MapFrom(src => src.UpdatedUser));
         }

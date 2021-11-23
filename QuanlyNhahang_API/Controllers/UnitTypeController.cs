@@ -21,5 +21,13 @@ namespace QuanlyNhahang_API.Controllers
         {
             return _context.UnitType.ToList();
         }
+        [HttpPost]
+        public UnitType Post([FromBody] UnitType UnitType)
+        {
+
+            _context.UnitType.Add(UnitType);
+            _context.SaveChanges();
+            return UnitType;
+        }
     }
 }

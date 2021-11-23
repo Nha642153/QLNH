@@ -39,7 +39,7 @@ namespace QuanlyNhahang_API.Controllers
 
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Status>>> Get()
+        public async Task<ActionResult<IEnumerable<StatusDTO>>> Get()
         {
             try
             {

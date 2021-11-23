@@ -73,6 +73,7 @@ namespace QuanlyNhahang_API.Controllers
             [HttpPut]
             public Restaurant Put([FromBody] Restaurant Restaurant)
             {
+            Restaurant.Updated = DateTime.Now;
             var restaurant = _context.Restaurant.Find(Restaurant.Id);
             if (restaurant == null)
             {
@@ -88,5 +89,25 @@ namespace QuanlyNhahang_API.Controllers
             _context.SaveChanges();
             return restaurant;
             }
+        [HttpDelete("{id:int}")]
+        public async Task<ActionResult<Restaurant >> DeleteRestaurant(int id)
+        {
+            try
+            {
+                var data = _context.Restaurant.Find(id);
+
+                if (data == null)
+                {
+                    return NotFound($"Restaurant with Id = {id} not found");
+                }
+
+                return new JsonResult(data); ;
+            }
+            catch (Exception)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError,
+                    "Error deleting data");
+            }
+        }
     }
 }

@@ -24,15 +24,14 @@
             Chinh sua (put)
              </summary>
         </member>
-        <member name="M:QuanlyNhahang_API.Controllers.RoleController.Get(System.Int32)">
-            <summary>
-            Lay Quyen voi Id
-            </summary>
-            <returns>Danh sach Role</returns>
-        </member>
         <member name="M:QuanlyNhahang_API.Controllers.RoleController.Post(QuanlyNhahang_API.Model.Role)">
             <summary>
-            Them Quyen
+            Them Nha hang
+             </summary>
+        </member>
+        <member name="M:QuanlyNhahang_API.Controllers.RoleController.Put(QuanlyNhahang_API.Model.Role)">
+            <summary>
+            Chinh sua (put)
              </summary>
         </member>
         <member name="M:QuanlyNhahang_API.Controllers.StatusController.Post(QuanlyNhahang_API.Model.Status)">
@@ -47,7 +46,7 @@
         </member>
         <member name="M:QuanlyNhahang_API.Controllers.UserController.Post(QuanlyNhahang_API.Model.User)">
             <summary>
-            Them Quyen
+            Them User
              </summary>
         </member>
     </members>

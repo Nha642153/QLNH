@@ -29,43 +29,18 @@ namespace QuanlyNhahang_API.Controllers
         //    return _context.User.ToList();
         //}
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<User>>> Get()
+        public async Task<ActionResult<IEnumerable<UserDTO>>> Get()
         {
             try
             {
-                var data = await _context.User.Select(d => new User
-                {
-                    Id = d.Id,
-                    UserName = d.UserName,
-                    Description = d.Description,
-                    Updated = d.Updated,
-                    Deleted = d.Deleted,
-                    OffDuty = d.OffDuty,
-                    Role = d.Role,
-                    CreatedUser = _context.User.Where(c => c.Id == d.CreatedUserId).Select(s => new User
-                    {
-                        Id = s.Id,
-                        UserName = s.UserName,
-                        Description = s.Description,
-                        Updated = d.Updated,
-                        Deleted = d.Deleted,
-                        OffDuty = d.OffDuty,
-                        Role = d.Role
-                    }).ToList(),
-                    UpdatedUser = _context.User.Where(c => c.Id == d.UpdatedUserId).Select(s => new User
-                    {
-                        Id = s.Id,
-                        UserName = s.UserName,
-                        Description = s.Description,
-                        Updated = d.Updated,
-                        Deleted = d.Deleted,
-                        OffDuty = d.OffDuty,
-                        Role = d.Role
-                    }).ToList()
-                }).ToArrayAsync();
+                var data = await _context.User
+                    //.Include(r => r.CreatedUser)
+                    //.Include(r => r.UpdatedUser)
+                    .Include(r=> r.Role)
+                
+                    .ToArrayAsync();
                 var model = _mapper.Map<IEnumerable<UserDTO>>(data);
                 return new JsonResult(model);
-                
             }
             catch (ArgumentException ex)
             {
@@ -79,15 +54,41 @@ namespace QuanlyNhahang_API.Controllers
             return _context.User.Where(user => user.Id == Id).FirstOrDefault();
         }
         ///<summary>
-        ///Them Quyen
+        ///Them User
         /// </summary>
         [HttpPost]
-        public User Post([FromQuery] User User)
+        public User Post([FromBody] User User)
         {
-            
+            //var createdUser = _context.User.Find(User.CreatedUserId);
+            //User.CreatedUser = (IEnumerable<User>)createdUser;
+            //var updatedUser = _context.User.Find(User.UpdatedUserId);
+            //User.UpdatedUser = (IEnumerable<User>)updatedUser;
+            User.Created = DateTime.Now;
+            User.Updated = DateTime.Now;
+            var role = _context.Role.Find((User.Role != null) ? User.Role.Id : 0);
+            User.Role = role;
             _context.User.Add(User);
             _context.SaveChanges();
             return User;
+        }
+        [HttpPut]
+        public User Put([FromBody] User User)
+        {
+            User.Updated = DateTime.Now;
+            var user = _context.User.Find(User.Id);
+            if (user == null)
+            {
+                return User;
+            }
+            user.UserName= User.UserName;
+            user.Description = User.Description;
+            user.Phone = User.Phone;
+            user.Address = User.Address;
+            user.Deleted = User.Deleted;
+            var updatedUser = _context.User.Find((User.UpdatedUser != null) ? User.UpdatedUserId : 1);
+            user.UpdatedUser = (IEnumerable<User>)updatedUser;
+            _context.SaveChanges();
+            return user;
         }
     }
 }

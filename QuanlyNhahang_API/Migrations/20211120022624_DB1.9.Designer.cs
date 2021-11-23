@@ -3,152 +3,23 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanlyNhahang_API.Data;
 
 namespace QuanlyNhahang_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211120022624_DB1.9")]
+    partial class DB19
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.CatogoryDTO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RestaurantDTOId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedUserId");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("RestaurantDTOId");
-
-                    b.HasIndex("UpdatedUserId");
-
-                    b.ToTable("CatogoryDTO");
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.RestaurantDTO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int?>("UpdatedUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CreatedUserId");
-
-                    b.HasIndex("UpdatedUserId");
-
-                    b.ToTable("RestaurantDTO");
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.UserDTO", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Address")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<DateTime>("Created")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("Deleted")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("OffDuty")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("Phone")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int?>("RoleId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("Updated")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("UserName")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("UserDTO");
-                });
 
             modelBuilder.Entity("QuanlyNhahang_API.Model.Catogory", b =>
                 {
@@ -157,14 +28,8 @@ namespace QuanlyNhahang_API.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("ChildrenId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
-
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
 
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
@@ -175,29 +40,13 @@ namespace QuanlyNhahang_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("ParentId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
-
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UpdatedUserId")
+                    b.Property<int>("parentId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("ChildrenId");
-
-                    b.HasIndex("CreatedUserId");
-
-                    b.HasIndex("ParentId");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.HasIndex("UpdatedUserId");
 
                     b.ToTable("Catogory");
                 });
@@ -576,9 +425,6 @@ namespace QuanlyNhahang_API.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("RestaurantId")
-                        .HasColumnType("int");
-
                     b.Property<int?>("UnitTypeId")
                         .HasColumnType("int");
 
@@ -591,8 +437,6 @@ namespace QuanlyNhahang_API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedUserId");
-
-                    b.HasIndex("RestaurantId");
 
                     b.HasIndex("UnitTypeId");
 
@@ -676,105 +520,6 @@ namespace QuanlyNhahang_API.Migrations
                     b.HasIndex("RoleId");
 
                     b.ToTable("User");
-                });
-
-            modelBuilder.Entity("UserDTOUserDTO", b =>
-                {
-                    b.Property<int>("CreatedUserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("UpdatedUserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("CreatedUserId", "UpdatedUserId");
-
-                    b.HasIndex("UpdatedUserId");
-
-                    b.ToTable("UserDTOUserDTO");
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.CatogoryDTO", b =>
-                {
-                    b.HasOne("QuanlyNhahang_API.DTO.UserDTO", "CreatedUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedUserId");
-
-                    b.HasOne("QuanlyNhahang_API.DTO.CatogoryDTO", "Parent")
-                        .WithMany("Children")
-                        .HasForeignKey("ParentId");
-
-                    b.HasOne("QuanlyNhahang_API.DTO.RestaurantDTO", "RestaurantDTO")
-                        .WithMany()
-                        .HasForeignKey("RestaurantDTOId");
-
-                    b.HasOne("QuanlyNhahang_API.DTO.UserDTO", "UpdatedUser")
-                        .WithMany()
-                        .HasForeignKey("UpdatedUserId");
-
-                    b.Navigation("CreatedUser");
-
-                    b.Navigation("Parent");
-
-                    b.Navigation("RestaurantDTO");
-
-                    b.Navigation("UpdatedUser");
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.RestaurantDTO", b =>
-                {
-                    b.HasOne("QuanlyNhahang_API.DTO.UserDTO", "CreatedUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedUserId");
-
-                    b.HasOne("QuanlyNhahang_API.DTO.UserDTO", "UpdatedUser")
-                        .WithMany()
-                        .HasForeignKey("UpdatedUserId");
-
-                    b.Navigation("CreatedUser");
-
-                    b.Navigation("UpdatedUser");
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.UserDTO", b =>
-                {
-                    b.HasOne("QuanlyNhahang_API.Model.Role", "Role")
-                        .WithMany()
-                        .HasForeignKey("RoleId");
-
-                    b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.Model.Catogory", b =>
-                {
-                    b.HasOne("QuanlyNhahang_API.DTO.CatogoryDTO", "Children")
-                        .WithMany()
-                        .HasForeignKey("ChildrenId");
-
-                    b.HasOne("QuanlyNhahang_API.Model.User", "CreatedUser")
-                        .WithMany()
-                        .HasForeignKey("CreatedUserId");
-
-                    b.HasOne("QuanlyNhahang_API.DTO.CatogoryDTO", "Parent")
-                        .WithMany()
-                        .HasForeignKey("ParentId");
-
-                    b.HasOne("QuanlyNhahang_API.Model.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId");
-
-                    b.HasOne("QuanlyNhahang_API.Model.User", "UpdatedUser")
-                        .WithMany()
-                        .HasForeignKey("UpdatedUserId");
-
-                    b.Navigation("CreatedUser");
-
-                    b.Navigation("Children");
-
-                    b.Navigation("Parent");
-
-                    b.Navigation("Restaurant");
-
-                    b.Navigation("UpdatedUser");
                 });
 
             modelBuilder.Entity("QuanlyNhahang_API.Model.Guest", b =>
@@ -884,10 +629,6 @@ namespace QuanlyNhahang_API.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedUserId");
 
-                    b.HasOne("QuanlyNhahang_API.Model.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId");
-
                     b.HasOne("QuanlyNhahang_API.Model.UnitType", "UnitType")
                         .WithMany()
                         .HasForeignKey("UnitTypeId");
@@ -897,8 +638,6 @@ namespace QuanlyNhahang_API.Migrations
                         .HasForeignKey("UpdatedUserId");
 
                     b.Navigation("CreatedUser");
-
-                    b.Navigation("Restaurant");
 
                     b.Navigation("UnitType");
 
@@ -912,26 +651,6 @@ namespace QuanlyNhahang_API.Migrations
                         .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
-                });
-
-            modelBuilder.Entity("UserDTOUserDTO", b =>
-                {
-                    b.HasOne("QuanlyNhahang_API.DTO.UserDTO", null)
-                        .WithMany()
-                        .HasForeignKey("CreatedUserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("QuanlyNhahang_API.DTO.UserDTO", null)
-                        .WithMany()
-                        .HasForeignKey("UpdatedUserId")
-                        .OnDelete(DeleteBehavior.ClientCascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("QuanlyNhahang_API.DTO.CatogoryDTO", b =>
-                {
-                    b.Navigation("Children");
                 });
 
             modelBuilder.Entity("QuanlyNhahang_API.Model.Item", b =>

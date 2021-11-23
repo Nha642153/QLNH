@@ -10,13 +10,15 @@ namespace QuanlyNhahang_API.DTO
     {
         public int Id { get; set; }
         public string UserName { get; set; }
-        //public string PassWord { get; set; }
+        public string Phone { get; set; }
+        public string Address { get; set; }
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public bool Deleted { get; set; }
         public string Description { get; set; }
         public bool OffDuty { get; set; }
         public virtual Role Role { get; set; }
+
         public IEnumerable<UserDTO> CreatedUser { get; set; }
         public IEnumerable<UserDTO> UpdatedUser { get; set; }
     }
