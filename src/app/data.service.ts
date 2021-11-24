@@ -6,6 +6,8 @@ import { Restaurant } from './model/retaurant';
 import { Role } from './model/role';
 import { Status } from './model/status';
 import { User } from './model/user';
+import { Unit } from './model/unit';
+import { TypeUnit } from './model/typeunit';
 
 @Injectable({
   providedIn: 'root'
@@ -89,6 +91,52 @@ export class DataService {
       updatedUserId:0,
     }
   };
+  public newUnit:Unit={
+    id:0,
+    name: '',
+    description:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+    unitType:{
+      id:0,
+      name:'',
+      description:'',
+      created:new Date,
+      updated:new Date,
+      deleted:false,
+  },
+    restaurantDTO:{
+      id:0,
+      name:'',
+      description:'',
+      phone:'',
+      address:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+    },
+    createdUser:{
+      id:0,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    },
+    updatedUser:{
+      id:1,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    }
+  };
   public newUser:User={
     id:0,
     userName: '',
@@ -135,6 +183,14 @@ export class DataService {
     updated:new Date(),
     deleted:false,
     
+  };
+  public newTypeUnit:TypeUnit={
+    id:0,
+    name:'',
+    description:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
   };
   constructor(private httpClient:HttpClient) { }
   public getAllRestaurant():Observable<Restaurant[]>{
@@ -184,5 +240,21 @@ export class DataService {
   public putUser(payload:User):Observable<User>{
     const url=`${this.REST_APIs}/user`;
     return this.httpClient.put<User>(url, payload,this.httpOptions);
+  }
+  public getAllUnit():Observable<Unit[]>{
+    const url=`${this.REST_APIs}/Unit`;
+    return this.httpClient.get<Unit[]>(url,this.httpOptions);
+  }
+  public postUnit(payload:Unit):Observable<Unit>{
+    const url=`${this.REST_APIs}/Unit`;
+    return this.httpClient.post<Unit>(url, payload,this.httpOptions);
+  }
+  public putUnit(payload:Unit):Observable<Unit>{
+    const url=`${this.REST_APIs}/Unit`;
+    return this.httpClient.put<Unit>(url, payload,this.httpOptions);
+  }
+  public getAllTypeUnit():Observable<TypeUnit[]>{
+    const url=`${this.REST_APIs}/UnitType`;
+    return this.httpClient.get<TypeUnit[]>(url,this.httpOptions);
   }
 }

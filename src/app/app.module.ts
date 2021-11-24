@@ -24,7 +24,7 @@ import {SliderModule} from 'primeng/slider';
 import {MultiSelectModule} from 'primeng/multiselect';
 import {ContextMenuModule} from 'primeng/contextmenu';
 import {DialogModule} from 'primeng/dialog';
-
+import {ToggleButtonModule} from 'primeng/togglebutton';
 import {ProgressBarModule} from 'primeng/progressbar';
 import {InputTextModule} from 'primeng/inputtext';
 import {ToolbarModule} from 'primeng/toolbar';
@@ -44,6 +44,10 @@ import { HomeComponent } from './home/home.component';
 import { FormsModule } from '@angular/forms';
 import { StatusComponent } from './status/status.component';
 import { UserComponent } from './user/user.component';
+import { UnitComponent } from './unit/unit.component';
+import { CatogoryComponent } from './catogory/catogory.component';
+import { OrderComponent } from './order/order.component';
+import { LoginComponent } from './login/login.component';
 
 @NgModule({
   declarations: [
@@ -55,7 +59,11 @@ import { UserComponent } from './user/user.component';
      RoleComponent,
      HomeComponent,
      StatusComponent,
-     UserComponent
+     UserComponent,
+     UnitComponent,
+     CatogoryComponent,
+     OrderComponent,
+     LoginComponent
   ],
   imports: [
     BrowserModule,
@@ -84,6 +92,7 @@ import { UserComponent } from './user/user.component';
     RadioButtonModule,
     InputNumberModule,
     TableModule,
+    ToggleButtonModule,
   
     MultiSelectModule,
 

@@ -16,35 +16,43 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     this.items = [
         {
-            label:'Nhà hàng',
-            icon:'pi pi-fw pi-home',
+            label:'🏘Nhà hàng',
             command:()=> this.router.navigate(['/restaurant'])       
         },
         {
-            label:'Users',
-            icon:'pi pi-fw pi-user',
+            label:'👮🏻‍♂️Users',
             items:[
                 {
-                    label:'Chức vụ',
-                    icon:'pi pi-fw pi-user-plus',
+                    label:'👨🏻‍💼Chức vụ', 
                     command:()=> this.router.navigate(['/user'])
                 },
                 {
-                    label:'Quyền',
-                    icon:'pi pi-fw pi-user-edit',
+                    label:'👨🏻‍⚖️Quyền',           
                     command:()=> this.router.navigate(['/role'])
                 },
                 
             ]
         },
         {
-            label:'Trình trạng',
-            icon:'pi pi-fw pi-flag',
+            label:'🚦Trình trạng',
            command:()=>this.router.navigate(['/status'])
         },
         {
-            label:'Đơn vị',
-            icon:'pi pi-fw pi-fi'
+            label:'🍽Đơn vị',
+           
+            command:()=>this.router.navigate(['/unit'])
+        },
+        {
+            label:'🍖Món ăn',
+            command:()=>this.router.navigate(['/catogory'])
+        },
+        {
+            label:'🖥🥩Đặt món',
+            command:()=>this.router.navigate(['/order'])
+        },
+        {
+            label:'🔐/🔑Login/Logout',
+            command:()=>this.router.navigate(['/login'])
         }
     ];
 }

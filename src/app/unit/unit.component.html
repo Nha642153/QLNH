@@ -18,7 +18,7 @@
             
         </p-dropdown>
         <ng-template pTemplate="left">
-            <button pButton pRipple label="Thêm Bàn và trạng thái" icon="pi pi-plus" class="p-button-success p-mr-1" (click)="openNew()"></button>
+            <button pButton pRipple label="Thêm Đơn vị" icon="pi pi-plus" class="p-button-success p-mr-1" (click)="openNew()"></button>
         </ng-template>
         <ng-template pTemplate="right">
             <span class="p-input-icon-left">
@@ -28,7 +28,7 @@
         </ng-template>
    </p-toolbar>
    <p-table #dt id="dataTable" 
-            [value]="displayStatus"
+            [value]="displayUnit"
             [rows]="10" [paginator]="true" 
             [globalFilterFields]="['name','desciption']"
             [rowHover]="true"
@@ -36,60 +36,72 @@
     <ng-template pTemplate="header">
         <tr>
             <th pSortableColumn="name">Tên <p-sortIcon field="name"></p-sortIcon> </th>           
-            <th pSortableColumn="desciption">Chú thích <p-sortIcon field="description"></p-sortIcon> </th>
+            <th pSortableColumn="desciption">Số Lượng<p-sortIcon field="description"></p-sortIcon> </th>
+            <th pSortableColumn="size">Lích cỡ <p-sortIcon field="size"></p-sortIcon> </th>
             <th pSortableColumn="created">Ngay tạo <p-sortIcon field="created"></p-sortIcon> </th>
             <th pSortableColumn="updated">Ngày chỉnh <p-sortIcon field="updated"></p-sortIcon> </th>
-            <th pSortableColumn="deleted">Trạng thái trống <p-sortIcon field="deleted"></p-sortIcon> </th>
+            <th pSortableColumn="deleted">Trạng Xóa<p-sortIcon field="deleted"></p-sortIcon> </th>
             <th></th>
         </tr>
     </ng-template>
-    <ng-template pTemplate="body" let-displayStatus>
+    <ng-template pTemplate="body" let-displayUnit>
         <tr>
-            <td>{{displayStatus.name}}</td>
-            <td>{{displayStatus.description}}</td>
-            <td>{{displayStatus.created | date:"dd/MM/yyyy"}}<br>
-                {{displayStatus.createdUser?.userName}}
+            <td>{{displayUnit.name}}</td>
+            <td>{{displayUnit.description}}</td>
+            <td>{{displayUnit.unitType.name}}</td>
+            <td>{{displayUnit.created | date:"dd/MM/yyyy"}}<br>
+                {{displayUnit.createdUser?.userName}}
             </td>
-            <td>{{displayStatus.updated | date:"dd/MM/yyyy"}}<br>
-                {{displayStatus.updatedUser?.userName}}
+            <td>{{displayUnit.updated | date:"dd/MM/yyyy"}}<br>
+                {{displayUnit.updatedUser?.userName}}
             </td>
-            <td><p-toggleButton 
-                    onLabel="Đang Bận"
-                     offLabel="Đang Trống"
-                    offIcon="pi pi-check" 
-                    onIcon="pi pi-times" 
-                    [(ngModel)]="displayStatus.deleted">
-                </p-toggleButton>
-            </td>
+            <td>{{displayUnit.deleted}}</td>
+           
             <td>
-                <button pButton pRipple type="button" label="Order" class="p-button-rounded p-button-primary"(click)="deleteStatus(displayStatus)"></button>
+                <button pButton pRipple type="button" label="Deleted" class="p-button-rounded p-button-warn"(click)="deleteUnit(displayUnit)"></button>
                 &nbsp;
-                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editStatus(displayStatus)"></button>
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editUnit(displayUnit)"></button>
             </td>
         </tr>
     </ng-template>
    </p-table>
 </div>
 <p-dialog
- [(visible)]="StatusDialog"
+ [(visible)]="UnitDialog"
  [style]="{width: '450px'}"
- header="Status Details"
+ header="Unit Details"
  [modal]="true"
  styleClass="p-fluid">
         <ng-template pTemplate="content">
             <div class="p-field">
                 <label for="name">Name</label>
-                <input type="text" pInputText id="name" [(ngModel)]="status.name" required autofocus />
-                <small class="p-invalid" *ngIf="!status.name">Name is required.</small>
+                <input type="text" pInputText id="name" [(ngModel)]="unit.name" required autofocus />
+                <small class="p-invalid" *ngIf="!unit.name">Name is required.</small>
+            </div>
+            <div class="p-field">
+                <p-dropdown [options]="typeUnits" 
+                [(ngModel)]="selectedTypeUnit"
+                optionLabel="name" 
+                [filter]="true" 
+                filterBy="name"
+                placeholder="Select Size"
+                [style]="{width:'300px'}"
+                >
+                <ng-template pTemplate="selectedItem">
+                    <div class="restaurant-item restaurant-item-value"  *ngIf="selectedTypeUnit">
+                        <div>{{selectedTypeUnit.name}}</div>
+                    </div>
+                </ng-template>
+                 </p-dropdown>
             </div>
             <div class="p-field">
                 <label for="description">Description</label>
-                <textarea id="description" pInputTextarea [(ngModel)]="status.description" required rows="3" cols="20"></textarea>
+                <textarea id="description" pInputTextarea [(ngModel)]="unit.description" required rows="3" cols="20"></textarea>
             </div>
         </ng-template>
         <ng-template pTemplate="footer">
             <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
-            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveStatus()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveUnit()"></button>
         </ng-template>
 </p-dialog>
 

@@ -4,6 +4,8 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { DataService } from '../data.service';
 import { Status} from '../model/status';
+import { ActivatedRoute, Router } from '@angular/router';
+
 
 @Component({
   selector: 'app-status',
@@ -28,7 +30,10 @@ export class StatusComponent implements OnInit {
 
   
  
-  constructor(private dataService:DataService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
+  constructor(private dataService:DataService,
+            private router:Router,private route: ActivatedRoute,
+            private messageService: MessageService,
+            private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.loadStatus();
@@ -71,21 +76,32 @@ export class StatusComponent implements OnInit {
     this.StatusDialog=true;
   }
   public deleteStatus(Status:Status):void{
-    console.log('delete Status: ',Status);
-    this.confirmationService.confirm({
-      message: 'Are you sure you want to booked ' + Status.name + '?',
-      header: 'Confirm',
-      icon: 'pi pi-exclamation-triangle',
-      accept: () => {
-          Status.deleted=true;
-          this.dataService.putStatus(Status).subscribe(data=>{
-            console.log('da cap nhat: ',data);
-            this.loadStatus();
-            this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
-          });
-          
-      }
-    });
+    this.router.navigate(['/order']);
+    // console.log('delete Status: ',Status);
+    // this.confirmationService.confirm({
+    //   message: 'Are you sure you want to booked ' + Status.name + '?',
+    //   header: 'Confirm',
+    //   icon: 'pi pi-exclamation-triangle',
+    //   accept: () => {
+    //     if(Status.deleted=false){
+    //       Status.deleted=true;
+    //       this.dataService.putStatus(Status).subscribe(data=>{
+    //         console.log('da cap nhat: ',data);
+    //         this.loadStatus();
+    //         this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
+    //       });
+    //     }
+    //    else{
+    //       Status.deleted=false
+    //       this.dataService.putStatus(Status).subscribe(data=>{
+    //         console.log('da cap nhat: ',data);
+    //         this.loadStatus();
+    //         //this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
+    //       });
+    //     }
+       
+    //   }
+    //});
   }
   hideDialog(cancel=true,success=true):void {
     this.StatusDialog = false;
