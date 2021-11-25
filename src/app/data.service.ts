@@ -7,7 +7,9 @@ import { Role } from './model/role';
 import { Status } from './model/status';
 import { User } from './model/user';
 import { Unit } from './model/unit';
+import { Catogory } from './model/catogory';
 import { TypeUnit } from './model/typeunit';
+import { CatogoryComponent } from './catogory/catogory.component';
 
 @Injectable({
   providedIn: 'root'
@@ -71,7 +73,7 @@ export class DataService {
       deleted:false,
     },
     createdUser:{
-      id:0,
+      id:this.loginUserId,
       userName:'',
       description:'',
       created:new Date(),
@@ -81,7 +83,7 @@ export class DataService {
       updatedUserId:0,
     },
     updatedUser:{
-      id:1,
+      id:this.loginUserId,
       userName:'',
       description:'',
       created:new Date(),
@@ -106,18 +108,9 @@ export class DataService {
       updated:new Date,
       deleted:false,
   },
-    restaurantDTO:{
-      id:0,
-      name:'',
-      description:'',
-      phone:'',
-      address:'',
-      created:new Date(),
-      updated:new Date(),
-      deleted:false,
-    },
+    restaurantDTO:this.newRestaurant,
     createdUser:{
-      id:0,
+      id:this.loginUserId,
       userName:'',
       description:'',
       created:new Date(),
@@ -127,7 +120,7 @@ export class DataService {
       updatedUserId:0,
     },
     updatedUser:{
-      id:1,
+      id:this.loginUserId,
       userName:'',
       description:'',
       created:new Date(),
@@ -191,6 +184,39 @@ export class DataService {
     created:new Date(),
     updated:new Date(),
     deleted:false,
+  };
+  public newCatogory:Catogory={
+    id:0,
+    name: '',
+
+    description:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+   // parent:
+   // children:this.newCatogory,
+    restaurant:this.newRestaurant,
+    createdUser:{
+      id:0,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    },
+    updatedUser:{
+      id:1,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    }
+
   };
   constructor(private httpClient:HttpClient) { }
   public getAllRestaurant():Observable<Restaurant[]>{
@@ -256,5 +282,17 @@ export class DataService {
   public getAllTypeUnit():Observable<TypeUnit[]>{
     const url=`${this.REST_APIs}/UnitType`;
     return this.httpClient.get<TypeUnit[]>(url,this.httpOptions);
+  }
+  public getAllCatogory():Observable<Catogory[]>{
+    const url=`${this.REST_APIs}/Catogory`;
+    return this.httpClient.get<Catogory[]>(url,this.httpOptions);
+  }
+  public postCatogory(payload:Catogory):Observable<Catogory>{
+    const url=`${this.REST_APIs}/Catogory`;
+    return this.httpClient.post<Catogory>(url, payload,this.httpOptions);
+  }
+  public putCatogory(payload:Catogory):Observable<Catogory>{
+    const url=`${this.REST_APIs}/Catogory`;
+    return this.httpClient.put<Catogory>(url, payload,this.httpOptions);
   }
 }

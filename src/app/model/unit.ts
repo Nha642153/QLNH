@@ -1,3 +1,7 @@
+import { Restaurant } from "./retaurant";
+import { TypeUnit } from "./typeunit";
+import { User } from "./user";
+
 export interface Unit{
     id:number,
     name: string,
@@ -5,42 +9,8 @@ export interface Unit{
     created:Date,
     updated:Date,
     deleted:boolean,
-    unitType:{
-        id:number;
-        name: string;
-        description:string;
-        created:Date;
-        updated:Date;
-        deleted:boolean;
-    }
-    restaurantDTO:{
-      id:number;
-      name: string;
-      description:string;
-      phone:string;
-      address:string;
-      created:Date;
-      updated:Date;
-      deleted:boolean;
-    },
-    createdUser:{
-        id:number,
-        userName:string,
-        description:string,
-        created: Date,
-        updated: Date,
-        deleted:boolean,
-        createdUserId:number,
-        updatedUserId:number,
-      },
-   updatedUser:{
-        id:number,
-        userName:string,
-        description:string,
-        created: Date,
-        updated: Date,
-        deleted:boolean,
-        createdUserId:number,
-        updatedUserId:number,
-      },
+    unitType:TypeUnit,
+    restaurantDTO:Restaurant,
+    createdUser:User["createdUser"],
+   updatedUser:User["updatedUser"],
 }
