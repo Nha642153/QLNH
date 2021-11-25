@@ -76,6 +76,7 @@ namespace QuanlyNhahang_API.Mapping
                   .ForMember(dest => dest.Deleted, opt => opt.MapFrom(src => src.Deleted))
                   .ForMember(dest => dest.Created, opt => opt.MapFrom(src => src.Created))
                   .ForMember(dest => dest.Updated, opt => opt.MapFrom(src => src.Updated))
+                  .ForMember(dest => dest.Restaurant, opt => opt.MapFrom(src => src.Restaurant))
                   .ForMember(dest => dest.ParentId, opt => opt.MapFrom(src => src.ParentId))
                   .ReverseMap();
         }

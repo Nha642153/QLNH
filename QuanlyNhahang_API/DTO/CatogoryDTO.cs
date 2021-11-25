@@ -20,7 +20,7 @@ namespace QuanlyNhahang_API.DTO
         [ForeignKey("ParentId")]
         public virtual CatogoryDTO Parent { get; set; }
         public virtual ICollection<CatogoryDTO> Children { get; set; }
-        public RestaurantDTO RestaurantDTO { get; set; }
+        public RestaurantDTO Restaurant { get; set; }
         public UserDTO CreatedUser { get; set; }
         public UserDTO UpdatedUser { get; set; }
 

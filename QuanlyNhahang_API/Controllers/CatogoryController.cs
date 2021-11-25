@@ -51,7 +51,8 @@ namespace QuanlyNhahang_API.Controllers
             Catogory.CreatedUser = createdUser;
             var updatedUser = _context.User.Find(Catogory.UpdatedUser.Id);
             Catogory.UpdatedUser = updatedUser;
-
+            var restaurant = _context.Restaurant.Find(Catogory.Restaurant.Id);
+            Catogory.Restaurant = restaurant;
             var parent = _context.Catogory.Find(Catogory.Parent?.Id);
             Catogory.Parent = parent;
 
