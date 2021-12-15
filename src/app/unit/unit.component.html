@@ -30,7 +30,7 @@
    <p-table #dt id="dataTable" 
             [value]="displayUnit"
             [rows]="10" [paginator]="true" 
-            [globalFilterFields]="['name','desciption']"
+            [globalFilterFields]="['name','description']"
             [rowHover]="true"
             dataKey="id">
     <ng-template pTemplate="header">
@@ -48,7 +48,7 @@
         <tr>
             <td>{{displayUnit.name}}</td>
             <td>{{displayUnit.description}}</td>
-            <td>{{displayUnit.unitType.name}}</td>
+            <td>{{displayUnit.unitType?.name}}</td>
             <td>{{displayUnit.created | date:"dd/MM/yyyy"}}<br>
                 {{displayUnit.createdUser?.userName}}
             </td>
@@ -86,7 +86,7 @@
                 filterBy="name"
                 placeholder="Select Size"
                 [style]="{width:'300px'}"
-                >
+                (onChange)="onChangeTypeUnit($event.value)">
                 <ng-template pTemplate="selectedItem">
                     <div class="restaurant-item restaurant-item-value"  *ngIf="selectedTypeUnit">
                         <div>{{selectedTypeUnit.name}}</div>

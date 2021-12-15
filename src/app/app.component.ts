@@ -43,11 +43,26 @@ export class AppComponent implements OnInit {
             command:()=>this.router.navigate(['/unit'])
         },
         {
-            label:'🍖Món ăn',
-            command:()=>this.router.navigate(['/catogory'])
+            label:'🧆Thức ăn',
+            items:[
+                {
+                    label:'🍖Thức ăn', 
+                    command:()=> this.router.navigate(['/item'])
+                },
+                {
+                    label:'🍖Món ăn', 
+                    command:()=> this.router.navigate(['/category'])
+                },
+                {
+                    label:'👨🏻‍⚖️Hình ảnh',           
+                    command:()=> this.router.navigate(['/image'])
+                },
+                
+            ]
         },
         {
             label:'🖥🥩Đặt món',
+            
             command:()=>this.router.navigate(['/order'])
         },
         {

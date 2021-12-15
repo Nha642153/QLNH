@@ -1,4 +1,4 @@
-export interface UnitType{
+export interface CategoryType{
     id:number;
     name: string;
     description:string;

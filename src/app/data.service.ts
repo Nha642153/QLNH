@@ -7,9 +7,12 @@ import { Role } from './model/role';
 import { Status } from './model/status';
 import { User } from './model/user';
 import { Unit } from './model/unit';
-import { Catogory } from './model/catogory';
-import { TypeUnit } from './model/typeunit';
-import { CatogoryComponent } from './catogory/catogory.component';
+import { Category } from './model/category';
+import { UnitType } from './model/typeunit';
+import { CategoryType } from './model/categoryType';
+import { Image } from './model/image';
+import { Item } from './model/item';
+
 
 @Injectable({
   providedIn: 'root'
@@ -107,8 +110,17 @@ export class DataService {
       created:new Date,
       updated:new Date,
       deleted:false,
-  },
-    restaurantDTO:this.newRestaurant,
+    },
+    restaurant:{
+      id:0,
+      name:'',
+      phone:'',
+      address:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+    },
     createdUser:{
       id:this.loginUserId,
       userName:'',
@@ -177,7 +189,7 @@ export class DataService {
     deleted:false,
     
   };
-  public newTypeUnit:TypeUnit={
+  public newTypeUnit:UnitType={
     id:0,
     name:'',
     description:'',
@@ -185,19 +197,41 @@ export class DataService {
     updated:new Date(),
     deleted:false,
   };
-  public newCatogory:Catogory={
+  public newCategoryType:CategoryType={
     id:0,
-    name: '',
-
+    name:'',
     description:'',
     created:new Date(),
     updated:new Date(),
     deleted:false,
-   // parent:
-   // children:this.newCatogory,
-    restaurant:this.newRestaurant,
-    createdUser:{
+  };
+  public newCategory:Category={
+    id:0,
+    name: '',
+    description:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+    categoryType:{
       id:0,
+      name:'',
+      description:'',
+      created:new Date,
+      updated:new Date,
+      deleted:false,
+    },
+    restaurant:{
+      id:0,
+      name:'',
+      phone:'',
+      address:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+    },
+    createdUser:{
+      id:this.loginUserId,
       userName:'',
       description:'',
       created:new Date(),
@@ -207,7 +241,7 @@ export class DataService {
       updatedUserId:0,
     },
     updatedUser:{
-      id:1,
+      id:this.loginUserId,
       userName:'',
       description:'',
       created:new Date(),
@@ -217,6 +251,109 @@ export class DataService {
       updatedUserId:0,
     }
 
+  };
+  public newItem:Item={
+    id:0,
+    name: '',
+    description:'',
+    price:'',
+    discount:0,
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+    itemImage:{
+      id:0,
+      name:'',
+      data:'',
+      description:'',
+      created:new Date,
+      updated:new Date,
+      deleted:false,
+    },
+    category:{
+      id:0,
+      name: '',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      categoryType:{
+        id:0,
+        name:'',
+        description:'',
+        created:new Date,
+        updated:new Date,
+        deleted:false,
+      },
+    },
+    restaurant:{
+      id:0,
+      name:'',
+      phone:'',
+      address:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+    },
+    createdUser:{
+      id:this.loginUserId,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    },
+    updatedUser:{
+      id:this.loginUserId,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    }
+
+  };
+  public newImage:Image={
+    id:0,
+    name: '',
+    description:'',
+    data:'',
+    created:new Date(),
+    updated:new Date(),
+    deleted:false,
+    Item:{
+      id:0,
+      name:'',
+      description:'',
+      created:new Date,
+      updated:new Date,
+      deleted:false,
+    },
+    createdUser:{
+      id:this.loginUserId,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    },
+    updatedUser:{
+      id:this.loginUserId,
+      userName:'',
+      description:'',
+      created:new Date(),
+      updated:new Date(),
+      deleted:false,
+      createdUserId:0,
+      updatedUserId:0,
+    }
   };
   constructor(private httpClient:HttpClient) { }
   public getAllRestaurant():Observable<Restaurant[]>{
@@ -279,20 +416,50 @@ export class DataService {
     const url=`${this.REST_APIs}/Unit`;
     return this.httpClient.put<Unit>(url, payload,this.httpOptions);
   }
-  public getAllTypeUnit():Observable<TypeUnit[]>{
+  public getAllTypeUnit():Observable<UnitType[]>{
     const url=`${this.REST_APIs}/UnitType`;
-    return this.httpClient.get<TypeUnit[]>(url,this.httpOptions);
+    return this.httpClient.get<UnitType[]>(url,this.httpOptions);
   }
-  public getAllCatogory():Observable<Catogory[]>{
-    const url=`${this.REST_APIs}/Catogory`;
-    return this.httpClient.get<Catogory[]>(url,this.httpOptions);
+  public getAllTypeCategory():Observable<CategoryType[]>{
+    const url=`${this.REST_APIs}/CategoryType`;
+    return this.httpClient.get<CategoryType[]>(url,this.httpOptions);
   }
-  public postCatogory(payload:Catogory):Observable<Catogory>{
-    const url=`${this.REST_APIs}/Catogory`;
-    return this.httpClient.post<Catogory>(url, payload,this.httpOptions);
+  public getAllCategory():Observable<Category[]>{
+    const url=`${this.REST_APIs}/Category`;
+    return this.httpClient.get<Category[]>(url,this.httpOptions);
   }
-  public putCatogory(payload:Catogory):Observable<Catogory>{
-    const url=`${this.REST_APIs}/Catogory`;
-    return this.httpClient.put<Catogory>(url, payload,this.httpOptions);
+  public postCategory(payload:Category):Observable<Category>{
+    const url=`${this.REST_APIs}/Category`;
+    return this.httpClient.post<Category>(url, payload,this.httpOptions);
+  }
+  public putCategory(payload:Category):Observable<Category>{
+    const url=`${this.REST_APIs}/Category`;
+    return this.httpClient.put<Category>(url, payload,this.httpOptions);
+  }
+  public getAllImage():Observable<Image[]>{
+    const url=`${this.REST_APIs}/ItemImage`;
+    return this.httpClient.get<Image[]>(url,this.httpOptions);
+  }
+  public postImage(payload:Image):Observable<any>{
+    const url=`${this.REST_APIs}/ItemImage`;
+    return this.httpClient.post(url, payload,{
+      reportProgress:true,
+      observe:'events',
+      headers:new HttpHeaders({
+        'Content-Type':'application/json',
+      }),
+    });
+  }
+  public getAllItem():Observable<Item[]>{
+    const url=`${this.REST_APIs}/Item`;
+    return this.httpClient.get<Item[]>(url,this.httpOptions);
+  }
+  public postItem(payload:Item):Observable<Item>{
+    const url=`${this.REST_APIs}/Item`;
+    return this.httpClient.post<Item>(url, payload,this.httpOptions);
+  }
+  public putItem(payload:Item):Observable<Item>{
+    const url=`${this.REST_APIs}/Item`;
+    return this.httpClient.put<Item>(url, payload,this.httpOptions);
   }
 }

@@ -3,6 +3,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { DataService } from '../data.service';
 import { User} from '../model/user';
+import * as FileSaver from 'file-saver'
 
 @Component({
   selector: 'app-user',
@@ -120,6 +121,32 @@ export class UserComponent implements OnInit {
         }
       );
     }
+  }
+  exportExcel() {
+    import("xlsx").then(xlsx => {
+      const worksheet = xlsx.utils.json_to_sheet(this.users);
+      const workbook = { Sheets: { data: worksheet }, SheetNames: ["data"] };
+      const excelBuffer: any = xlsx.write(workbook, {
+        bookType: "xlsx",
+        type: "array"
+      });
+      this.saveAsExcelFile(excelBuffer, "Nhan vien");
+    });
+  }
+
+  saveAsExcelFile(buffer: any, fileName: string): void {
+
+      let EXCEL_TYPE =
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8";
+      let EXCEL_EXTENSION = ".xlsx";
+      const data: Blob = new Blob([buffer], {
+        type: EXCEL_TYPE
+      });
+      FileSaver.saveAs(
+        data,
+        "Export_"+ fileName  + new Date().getDate()+"_"+ new Date().getMonth()+"_"+ new Date().getFullYear() + EXCEL_EXTENSION
+      );
+    
   }
 }
   

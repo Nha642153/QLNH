@@ -75,33 +75,42 @@ export class StatusComponent implements OnInit {
     this.status=statuss;
     this.StatusDialog=true;
   }
-  public deleteStatus(Status:Status):void{
+  public orderStatus(Status:Status):void{
     this.router.navigate(['/order']);
-    // console.log('delete Status: ',Status);
-    // this.confirmationService.confirm({
-    //   message: 'Are you sure you want to booked ' + Status.name + '?',
-    //   header: 'Confirm',
-    //   icon: 'pi pi-exclamation-triangle',
-    //   accept: () => {
-    //     if(Status.deleted=false){
-    //       Status.deleted=true;
-    //       this.dataService.putStatus(Status).subscribe(data=>{
-    //         console.log('da cap nhat: ',data);
-    //         this.loadStatus();
-    //         this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
-    //       });
-    //     }
-    //    else{
-    //       Status.deleted=false
-    //       this.dataService.putStatus(Status).subscribe(data=>{
-    //         console.log('da cap nhat: ',data);
-    //         this.loadStatus();
-    //         //this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
-    //       });
-    //     }
+    Status.deleted=true;
+    this.dataService.putStatus(Status).subscribe(data=>{
+      console.log('da cap nhat: ',data);
+      this.loadStatus();
+      this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Trạng thái'+' '+data.name, life: 3000});
+    });
+  }
+  public deleteStatus(Status:Status):void{
+    
+    console.log('delete Status: ',Status);
+    this.confirmationService.confirm({
+      message: Status.name +' ĐANG BẬN '+ '?',
+      header: 'Confirm',
+      icon: 'pi pi-exclamation-triangle',
+      accept: () => {
+        
+          Status.deleted=true;
+          this.dataService.putStatus(Status).subscribe(data=>{
+            console.log('da cap nhat: ',data);
+            this.loadStatus();
+            this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Trạng thái', life: 3000});
+          });
+        
+      //  else{
+      //     Status.deleted=false
+      //     this.dataService.putStatus(Status).subscribe(data=>{
+      //       console.log('da cap nhat: ',data);
+      //       this.loadStatus();
+      //       //this.messageService.add({severity:'warn', summary: 'Successful', detail: 'Deleted', life: 3000});
+      //     });
+      //   }
        
-    //   }
-    //});
+      }
+    });
   }
   hideDialog(cancel=true,success=true):void {
     this.StatusDialog = false;

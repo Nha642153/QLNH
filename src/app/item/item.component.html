@@ -1,0 +1,146 @@
+<p-toast></p-toast>
+<div *ngIf="loading" class="lds-roller" style="font-size: 200%; left: 40%; margin-top:20%"><div>Loading Data</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="card" *ngIf="!loading">
+    <p-toolbar styleClass="p-mb-4">
+        <p-dropdown [options]="restaurants" 
+                    [(ngModel)]="selectedRestaurant"
+                    optionLabel="name" 
+                    [filter]="true" 
+                    filterBy="name"
+                    placeholder="Select a Restaurant"
+                    [style]="{width:'500px'}"
+                    (onChange)="onRestaurantChange($event.value)">
+            <ng-template pTemplate="selectedItem">
+                <div class="restaurant-item restaurant-item-value"  *ngIf="selectedRestaurant">
+                      <div>{{selectedRestaurant.name}}</div>
+                </div>
+            </ng-template>
+            
+        </p-dropdown>
+        <ng-template pTemplate="left">
+            <button pButton pRipple label="Thêm Đơn vị" icon="pi pi-plus" class="p-button-success p-mr-1" (click)="openNew()"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <span class="p-input-icon-left">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value,'contains')" placeholder="Search...."/>
+            </span>
+        </ng-template>
+   </p-toolbar>
+   <p-table #dt id="dataTable" 
+            [value]="displayItem"
+            [rows]="10" [paginator]="true" 
+            [globalFilterFields]="['name','discount','price']"
+            [rowHover]="true"
+            dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="image">Ảnh<p-sortIcon field="image"></p-sortIcon> </th>
+            <th pSortableColumn="name">Tên <p-sortIcon field="name"></p-sortIcon> </th>       
+            <th pSortableColumn="name">Loại<p-sortIcon field="category"></p-sortIcon> </th>        
+            <th pSortableColumn="desciption">Chú thích<p-sortIcon field="description"></p-sortIcon> </th>
+            <th pSortableColumn="price">Giá<p-sortIcon field="price"></p-sortIcon> </th>
+            
+            <th pSortableColumn="created">Ngay tạo <p-sortIcon field="created"></p-sortIcon> </th>
+            <th pSortableColumn="updated">Ngày chỉnh <p-sortIcon field="updated"></p-sortIcon> </th>
+            <th pSortableColumn="deleted">Trạng Xóa<p-sortIcon field="deleted"></p-sortIcon> </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-displayItem>
+        <tr>
+            <td style="width:230px">          
+                 <img [src]="'data:image/jpg;base64,'+displayItem.itemImage.data" width="200px"/>
+            </td>
+            <td>{{displayItem.name}}</td>
+            <td>{{displayItem.category.name}}</td>
+            <td style="width: 170px;">{{displayItem.description}}</td>
+            <td>{{displayItem.price}}</td>
+            <td>{{displayItem.created | date:"dd/MM/yyyy"}}<br>
+                {{displayItem.createdUser?.userName}}
+            </td>
+            <td>{{displayItem.updated | date:"dd/MM/yyyy"}}<br>
+                {{displayItem.updatedUser?.userName}}
+            </td>
+            <td>{{displayItem.deleted}}</td>
+           
+            <td>
+                <button pButton pRipple type="button" label="Xóa" class="p-button-rounded p-button-warn"(click)="deleteItem(displayItem)"></button>
+                &nbsp;
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editItem(displayItem)"></button>
+            </td>
+        </tr>
+    </ng-template>
+   </p-table>
+</div>
+<p-dialog
+ [(visible)]="ItemDialog"
+ [style]="{width: '450px'}"
+ header="Item Details"
+ [modal]="true"
+ styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="item.name" required autofocus />
+                <small class="p-invalid" *ngIf="!item.name">Name is required.</small>
+            </div>
+            <div class="p-field">
+                <p-dropdown [options]="Categorys" 
+                [(ngModel)]="selectedCategory"
+                optionLabel="name" 
+                [filter]="true" 
+                filterBy="name"
+                placeholder="Select Size"
+                [style]="{width:'300px'}"
+                (onChange)="onChangeCategory($event.value)">
+                <ng-template pTemplate="selectedItem">
+                    <div class="restaurant-item restaurant-item-value"  *ngIf="selectedCategory">
+                        <div>{{selectedCategory.name}}</div>
+                    </div>
+                </ng-template>
+                 </p-dropdown>
+            </div>
+            <div class="p-field">
+                <p-dropdown [options]="images" 
+                [(ngModel)]="selectedImage"
+                optionLabel="name" 
+                [filter]="true" 
+                filterBy="name"
+                placeholder="Select Image"
+                [style]="{width:'300px'}"
+                (onChange)="onChangeImage($event.value)">
+                <p-card  [style]="{'width': '250px', 'margin-bottom': '2em'}">
+     
+                    <img [src]="imagePath" width="150px"/>
+    
+            </p-card>
+                 </p-dropdown>
+            </div>
+            <p-card  [style]="{'width': '250px', 'margin-bottom': '2em'}">
+     
+                    <img [src]="imagePath" width="150px"/>
+    
+            </p-card>
+           
+      
+            
+            <div class="p-field">
+                <label for="price">Giá</label>
+                <p-inputNumber [(ngModel)]="item.price"></p-inputNumber>
+                <!-- <textarea id="price" pInputTextarea [(ngModel)]="item.price" required rows="3" cols="20"></textarea> -->
+            </div>
+            <div class="p-field">
+                <label for="description">Description</label>
+                <textarea id="description" pInputTextarea [(ngModel)]="item.description" required rows="3" cols="20"></textarea>
+            </div>
+            
+           
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveItem()"></button>
+        </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>    

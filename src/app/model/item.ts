@@ -1,17 +1,30 @@
-import { Restaurant } from "./retaurant";
-
+import { Category } from "./category";
+import { CategoryType } from "./categoryType";
+import { Image } from "./image";
 import { User } from "./user";
 
-export interface Unit{
+export interface Item{
     id:number,
     name: string,
     description:string,
+    price:string,
     created:Date,
     updated:Date,
     deleted:boolean,
-    unitType:{
+    discount:number;
+    category:{
+        id:number,
+        name: string,
+        description:string,
+        created:Date,
+        updated:Date,
+        deleted:boolean,
+        categoryType:CategoryType,
+    },
+    itemImage:{
         id:number;
         name: string;
+        data:string,
         description:string;
         created:Date;
         updated:Date;

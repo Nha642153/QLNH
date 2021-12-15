@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RouterModule } from "@angular/router";
 import { HttpClientModule } from '@angular/common/http';
+import {FileUploadModule} from 'primeng/fileupload';
 
 
 
@@ -31,6 +32,10 @@ import {ToolbarModule} from 'primeng/toolbar';
 import {RadioButtonModule} from 'primeng/radiobutton';
 import {InputNumberModule} from 'primeng/inputnumber';
 import {DropdownModule} from 'primeng/dropdown';
+import {CarouselModule} from 'primeng/carousel';
+import { ChipModule } from 'primeng/chip';
+import {AccordionModule} from 'primeng/accordion';
+
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -45,9 +50,15 @@ import { FormsModule } from '@angular/forms';
 import { StatusComponent } from './status/status.component';
 import { UserComponent } from './user/user.component';
 import { UnitComponent } from './unit/unit.component';
-import { CatogoryComponent } from './catogory/catogory.component';
+
 import { OrderComponent } from './order/order.component';
 import { LoginComponent } from './login/login.component';
+import { CategoryComponent } from './category/category.component';
+import { ImageComponent } from './image/image.component';
+import { ItemComponent } from './item/item.component';
+import { GuestableComponent } from './guestable/guestable.component';
+import { MenuItemComponent } from './menu-item/menu-item.component';
+import { CartComponent } from './cart/cart.component';
 
 @NgModule({
   declarations: [
@@ -61,9 +72,15 @@ import { LoginComponent } from './login/login.component';
      StatusComponent,
      UserComponent,
      UnitComponent,
-     CatogoryComponent,
+
      OrderComponent,
-     LoginComponent
+     LoginComponent,
+     CategoryComponent,
+     ImageComponent,
+     ItemComponent,
+     GuestableComponent,
+     MenuItemComponent,
+     CartComponent
   ],
   imports: [
     BrowserModule,
@@ -71,9 +88,11 @@ import { LoginComponent } from './login/login.component';
     AppRoutingModule,
     RouterModule,
     HttpClientModule,
+    FileUploadModule,
 
     ButtonModule,
     CardModule,
+    CarouselModule,
     SplitterModule,
     MenubarModule,
     InputTextareaModule,
@@ -83,6 +102,7 @@ import { LoginComponent } from './login/login.component';
     CalendarModule,
     SliderModule,
     ContextMenuModule,
+    AccordionModule,
     DialogModule,
     DropdownModule,
     ProgressBarModule,
@@ -93,7 +113,7 @@ import { LoginComponent } from './login/login.component';
     InputNumberModule,
     TableModule,
     ToggleButtonModule,
-  
+    ChipModule,
     MultiSelectModule,
 
     FormsModule,

@@ -17,7 +17,7 @@ export interface Restaurant{
         createdUserId:number,
         updatedUserId:number,
       },
-      updatedUser:{
+    updatedUser:{
         id:number,
         userName:string,
         description:string,

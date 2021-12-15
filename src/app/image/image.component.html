@@ -1,0 +1,57 @@
+<p-toast></p-toast>
+
+<div class="card">
+ 
+    <p-fileUpload 
+        name="demo[]" 
+        [customUpload]="true"
+        (uploadHandler)="onUpload($event)"
+        (onSelect)="onSelect($event)"
+        [multiple]="true"
+        accept="image/*"
+        [maxFileSize]="500000000">
+        <!-- <ng-template pTemplate="content">
+                <ul *ngIf="uploadedFiles.length">
+                    <li *ngFor="let file of uploadedFiles">{{file.name}} - {{file.size}} bytes</li>
+                </ul>
+            </ng-template> -->
+    </p-fileUpload>
+    <br>
+    <!-- <div>
+        <p-carousel
+            *ngIf="!loading && img.length>0"
+            [value]="img"
+            [numVisible]="3"
+            [numScroll]="3"
+            [circular]="true"
+            [responsiveOptions]="resposiveOptions">
+            <ng-template let-item pTemplate="item">
+               <div class="item-item">
+                   <div class="item-item-content">
+                       <div class="p-mb-3">
+                           <img src="item.data" alt="item.name" class="item-image">
+                       </div>
+                   </div>
+                   <h4 class="p-mb-1">{{item.name}}</h4>
+                   
+                   <div class="car-button p-mt-5">
+                       <p-button type="button" styleClass="p-button p-button-rounded p-mr-2" icon="pi pi-search"></p-button>
+                       <p-button type="button" styleClass="p-button-success p-button-rounded p-mr-2" icon="pi pi-star-fill"></p-button>
+                       <p-button type="button" styleClass="p-button-help p-button-rounded" icon="pi pi-cog"></p-button>
+                   </div>
+               </div>
+            </ng-template>
+        </p-carousel>
+    </div> -->
+
+  <div *ngFor="let imagePath of img">
+    <p-card  [style]="{'width': '250px', 'margin-bottom': '2em'}">
+        <ng-template pTemplate="header">
+            <span *ngIf="loading">Đang tải ảnh</span>
+            <img *ngIf="!loading" [src]="imagePath" width="50px"/>
+        </ng-template>
+
+    </p-card>
+  </div>
+   
+</div>

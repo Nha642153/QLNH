@@ -1,1 +1,101 @@
-<p>order works!</p>
+<p-toast></p-toast>
+<div class="doNotPrint">
+    <div *ngIf="!loading && selectedGuestTable ">
+        <div class="p-d-flex p-ai-center">
+            <div class="p-mr-1">
+                <p-chip label="Xóa bộ lọc" styleClass="p-mr-1 custom-chip-red" (click)="clearFilter()"></p-chip>
+            </div>
+            <div class="p-mr-1" *ngFor="let category of filterCategory">
+                <div class="p-mr-2" >
+                    <p-chip
+                   label="{{category.name}}"
+                    styleClass="p-mr-2 custom-chip"
+                    (click)="selecteCategory(category)"
+                  ></p-chip>
+                </div>
+            </div>
+        </div>
+        
+        <div class="grid-container-4" *ngIf="selectedGuestTable && !loading">
+            <div *ngFor="let item of selectedItem" class="grid-item" >
+                <p-card
+                 header="{{item?.name}}" 
+                 subheader="{{item && item.price && item.price.length>0
+                            ?(item.price|currency: 'VND':'symbol':'0.0-0'):'?'
+                            }}" 
+                 [style]="{width: '250px', heigth:'200px'}" 
+                 
+                 styleClass="p-card-shadow">
+                    <ng-template pTemplate="header">
+                        <img [src]="'data:image/jpg;base64,'+item.itemImage.data" alt="item?.name">
+                    </ng-template>
+                    <p class="cart">
+                        {{item?.description}}
+                    </p>
+                    <ng-template pTemplate="footer">
+                        <p-button label="Order" icon="pi pi-check" (click)="order(item)"></p-button>      
+                    </ng-template>
+                </p-card>
+            </div> 
+        </div>
+       
+    </div>
+</div>
+<div class="grid-container" *ngIf="!selectedGuestTable"> 
+    <div *ngFor="let table of status" >
+        <div class="grid-item">
+       
+            <app-guestable
+             name="{{table.name}}"
+            (click)="orderForTable(table)"
+            style="cursor: pointer;"
+            ></app-guestable> 
+        </div>
+    </div>
+</div>
+<div *ngIf="loading" class="lds-roller" style="font-size: 200%; left: 40%; margin-top:20%"><div>Loading Data</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+
+
+<div class="topCorner" id="cart" *ngIf="selectedGuestTable">
+    <p-accordion class="myCart" >
+        <p-accordionTab header="Đơn hàng của {{selectedGuestTable.name}} : {{
+            orderItem?orderItem.length:0}} món" >
+         <div class="cart myCart">
+             <p-table responsiveLayout="scroll" [value]="orderItem">
+                 <ng-template pTemplate="header" let-columns>
+                     <tr>
+                         <th>Hình</th>     
+                         <th>Món ăn</th>    
+                         <th>Số lượng</th>    
+                         <th>Đơn giá</th>   
+                         <!-- <th>Thành tiền</th>             -->
+                     </tr>
+                 </ng-template>
+                 <ng-template pTemplate="body" let-orderItems let-columns="columns">
+                     <tr>
+                         <td> <img [src]="'data:image/jpg;base64,'+orderItems.itemImage.data" alt="item.name" width="50px"></td>     
+                         <td>{{orderItems.name}}</td>   
+                         <td> <div class="p-field p-col-12 p-md-3">
+                            <p-inputNumber [(ngModel)]="orderItems.discount" mode="decimal" [showButtons]="true" inputId="minmax-buttons" (click)="upQuality(soLuong)"[min]="-1" [max]="20">
+                            </p-inputNumber>
+                            </div>
+                         </td>
+           
+                         <td> {{orderItems.price }}</td>     
+                         <!-- <td>{{orderItems.Total}}</td>       -->
+                     </tr>
+                </ng-template>
+                 <ng-template pTemplate="summary" style="right: 10px">
+                     Tổng cộng: {{subTotal| currency: 'VND':'symbol':'0.0-0'}} VND
+                     <div class="doNotPrint" style="position: absolute;left: 70%;">
+                        <p-button label="Hủy" (click)="Cancel()"></p-button> 
+                        <p-button (click)="onPrint()">Print</p-button>
+                     </div>
+                  
+                 </ng-template>
+             </p-table>
+         </div>
+        </p-accordionTab>
+        
+    </p-accordion>
+</div>

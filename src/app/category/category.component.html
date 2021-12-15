@@ -1,0 +1,112 @@
+
+<p-toast></p-toast>
+<div *ngIf="loading" class="lds-roller" style="font-size: 200%; left: 40%; margin-top:20%"><div>Loading Data</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
+<div class="card" *ngIf="!loading">
+    <p-toolbar styleClass="p-mb-4">
+        <p-dropdown [options]="restaurants" 
+                    [(ngModel)]="selectedRestaurant"
+                    optionLabel="name" 
+                    [filter]="true" 
+                    filterBy="name"
+                    placeholder="Select a Restaurant"
+                    [style]="{width:'350px'}"
+                    (onChange)="onRestaurantChange($event.value)">
+            <ng-template pTemplate="selectedItem">
+                <div class="restaurant-item restaurant-item-value"  *ngIf="selectedRestaurant">
+                      <div>{{selectedRestaurant.name}}</div>
+                </div>
+            </ng-template>
+            
+        </p-dropdown>
+        <ng-template pTemplate="left" [style]="{width:'350px'}">
+            <button pButton pRipple label="Thêm Đơn vị" icon="pi pi-plus" class="p-button-success p-mr-1" (click)="openNew()"></button>
+        </ng-template>
+        <ng-template pTemplate="right">
+            <span class="p-input-icon-left" width="400px">
+                <i class="pi pi-search"></i>
+                <input pInputText type="text" (input)="dt.filterGlobal($any($event.target).value,'contains')" placeholder="Search...."/>
+            </span>
+        </ng-template>
+   </p-toolbar>
+   <p-table #dt id="dataTable" 
+            [value]="displayCategory"
+            [rows]="10" [paginator]="true" 
+            [globalFilterFields]="['name1','name','description']"
+            [rowHover]="true"
+            dataKey="id">
+    <ng-template pTemplate="header">
+        <tr>
+            <th pSortableColumn="name">Thể loại <p-sortIcon field="name"></p-sortIcon> </th>
+            <th pSortableColumn="name1">Tên <p-sortIcon field="name1"></p-sortIcon> </th>           
+            <th pSortableColumn="description">Chú thích<p-sortIcon field="description"></p-sortIcon> </th>
+          
+            <th pSortableColumn="created">Ngay tạo <p-sortIcon field="created"></p-sortIcon> </th>
+            <th pSortableColumn="updated">Ngày chỉnh <p-sortIcon field="updated"></p-sortIcon> </th>
+            <th pSortableColumn="deleted">Trạng Xóa<p-sortIcon field="deleted"></p-sortIcon> </th>
+            <th></th>
+        </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-displayCategory>
+        <tr>
+            <td>{{displayCategory.categoryType?.name}}</td>
+            <td>{{displayCategory.name}}</td>
+            <td>{{displayCategory.description}}</td>
+            <td>{{displayCategory.created | date:"dd/MM/yyyy"}}<br>
+                {{displayCategory.createdUser?.userName}}
+            </td>
+            <td>{{displayCategory.updated | date:"dd/MM/yyyy"}}<br>
+                {{displayCategory.updatedUser?.userName}}
+            </td>
+            <td>{{displayCategory.deleted}}</td>
+           
+            <td>
+                <button pButton pRipple type="button" label="Deleted" class="p-button-rounded p-button-warn"(click)="deleteCategory(displayCategory)"></button>
+                &nbsp;
+                <button pButton pRipple icon="pi pi-pencil" class="p-button-rounded p-button-success p-mr-2" (click)="editCategory(displayCategory)"></button>
+            </td>
+        </tr>
+    </ng-template>
+   </p-table>
+</div>
+<p-dialog
+ [(visible)]="CategoryDialog"
+ [style]="{width: '450px'}"
+ header="Category Details"
+ [modal]="true"
+ styleClass="p-fluid">
+        <ng-template pTemplate="content">
+            <div class="p-field">
+                <p-dropdown [options]="typeCategorys" 
+                    [(ngModel)]="selectedTypeCategory"
+                    optionLabel="name" 
+                    [filter]="true" 
+                    filterBy="name"
+                    placeholder="Select Thể loại"
+                    [style]="{width:'300px'}"
+                    (onChange)="onChangeTypeCategory($event.value)">
+                    <ng-template pTemplate="selectedItem">
+                        <div class="restaurant-item restaurant-item-value"  *ngIf="selectedTypeCategory">
+                            <div>{{selectedTypeCategory.name}}</div>
+                        </div>
+                    </ng-template>
+                 </p-dropdown>
+                 <small class="p-invalid" *ngIf="!selectedTypeCategory">Cần Thể loại</small>
+            </div>
+            <div class="p-field">
+                <label for="name">Name</label>
+                <input type="text" pInputText id="name" [(ngModel)]="category.name" required autofocus />
+                <small class="p-invalid" *ngIf="!category.name">Name is required.</small>
+            </div>
+           
+            <div class="p-field">
+                <label for="description">Description</label>
+                <textarea id="description" pInputTextarea [(ngModel)]="category.description" required rows="3" cols="20"></textarea>
+            </div>
+        </ng-template>
+        <ng-template pTemplate="footer">
+            <button pButton pRipple label="Cancel" icon="pi pi-times" class="p-button-text" (click)="hideDialog()"></button>
+            <button pButton pRipple label="Save" icon="pi pi-check" class="p-button-text" (click)="saveCategory()"></button>
+        </ng-template>
+</p-dialog>
+
+<p-confirmDialog [style]="{width: '450px'}"></p-confirmDialog>    

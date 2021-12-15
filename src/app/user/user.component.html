@@ -2,6 +2,9 @@
 <div *ngIf="loading" class="lds-roller" style="font-size: 200%; left: 40%; margin-top:20%"><div>Loading Data</div><div></div><div></div><div></div><div></div><div></div><div></div><div></div></div>
 <div class="card" *ngIf="!loading">
     <p-toolbar styleClass="p-mb-4">
+        <button pButton pRipple icon="pi pi-file-excel" class="p-button-success pr-mr-1" label="Xuất Excel" (click)="exportExcel()">
+          
+        </button>
         <!-- <ng-template pTemplate="left">
             <button pButton pRipple label="Thêm Nhân Viên " icon="pi pi-plus" class="p-button-success p-mr-1" (click)="openNew()"></button>
         </ng-template> -->

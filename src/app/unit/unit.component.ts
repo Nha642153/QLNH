@@ -4,7 +4,7 @@ import { ConfirmationService } from 'primeng/api';
 import { MessageService } from 'primeng/api';
 import { DataService } from '../data.service';
 import { Status} from '../model/status';
-import { TypeUnit } from '../model/typeunit';
+import { UnitType } from '../model/typeunit';
 import { Unit } from '../model/unit';
 
 @Component({
@@ -25,10 +25,13 @@ export class UnitComponent implements OnInit {
   unit:Unit=Object.assign({},this.dataService.newUnit);
   submited=true;
   loading=true;
-  selectedTypeUnit:TypeUnit| undefined ;
-  typeUnits:TypeUnit[]=[];
+
+  selectedTypeUnit:UnitType| undefined ;
+  typeUnits:UnitType[]=[];
+
   selectedRestaurant:Restaurant | undefined ;
   restaurants:Restaurant[]=[];
+
   constructor(private dataService:DataService,
           private messageService: MessageService,
           private confirmationService: ConfirmationService) { }
@@ -47,7 +50,7 @@ export class UnitComponent implements OnInit {
   public loadTypeUnit():void{
     this.dataService.getAllTypeUnit().subscribe(data=>{
       this.typeUnits=data;
-      console.log('size: ',data);
+      console.log('size-typeUnits: ',this.typeUnits);
     });
   }
   public loadUnit():void{
@@ -55,7 +58,7 @@ export class UnitComponent implements OnInit {
     this.dataService.getAllUnit().subscribe(data=>{
       this.units=data;
       this.loading=false;
-      console.log('Unit: ',data);
+      console.log('Unit: ',this.units);
     });
   }
   openNew():void {
@@ -68,10 +71,11 @@ export class UnitComponent implements OnInit {
       }); return;
     }else{
    console.log('openNew: ');
-   this.unit=Object.assign({},this.dataService.newUnit);
-    this.unit.restaurantDTO.id=this.selectedRestaurant.id;
-    
-   this.UnitDialog = true;
+    this.unit=Object.assign({},this.dataService.newUnit);
+    this.unit.restaurant.id=this.selectedRestaurant.id;
+    if(this.selectedTypeUnit)
+    this.unit.unitType.id=this.selectedTypeUnit?.id;
+    this.UnitDialog = true;
     }
 }
 
@@ -140,11 +144,16 @@ export class UnitComponent implements OnInit {
     if(this.unit.id===0){
       this.unit.createdUser.id=this.dataService.loginUserId;
       this.unit.updatedUser.id=this.dataService.loginUserId;
+      if(this.selectedTypeUnit){
+         this.unit.unitType.id=this.selectedTypeUnit?.id;
+      }
       this.dataService.postUnit(this.unit).subscribe(
         (data)=>{
+         
+          this.displayUnit=this.units.filter(
+            (unit)=>unit.restaurant.id===this.selectedRestaurant?.id);
+          //  this.unit.unitType?.id===this.selectedTypeUnit?.id);
         console.log('return data: ',data);
-        this.displayUnit=this.units.filter(
-          (unit)=>unit.restaurantDTO.id===this.selectedRestaurant?.id);
         this.units.push(data);
         this.hideDialog(false,true);
       },
@@ -172,7 +181,16 @@ export class UnitComponent implements OnInit {
     const restaurant:Restaurant=event;
     console.log('on change= ',restaurant);
     
-      this.displayUnit=this.units.filter(st=>st.restaurantDTO?.id===restaurant?.id);
+      this.displayUnit=this.units.filter(st=>st.restaurant?.id===restaurant?.id);
+    
+    //console.log('on change this.displayRestaurant= ', this.displayUnit);
+  
+  }
+  public onChangeTypeUnit(event:any):void{
+    const unitType:UnitType=event;
+    console.log('on change= ',unitType);
+    
+     // this.displayUnit=this.units.filter(st=>st.unitType?.id===typeunit?.id);
     
     //console.log('on change this.displayRestaurant= ', this.displayUnit);
   
