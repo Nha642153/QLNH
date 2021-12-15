@@ -50,10 +50,15 @@ namespace QuanlyNhahang_API.Controllers
         public Unit Post([FromBody] Unit Unit)
         {
             Unit.Created = DateTime.Now;
+            Unit.Updated = DateTime.Now;
             var createdUser = _context.User.Find(Unit.CreatedUser.Id);
             Unit.CreatedUser = createdUser;
             var updatedUser = _context.User.Find(Unit.UpdatedUser.Id);
             Unit.UpdatedUser = updatedUser;
+            var restaurant = _context.Restaurant.Find(Unit.Restaurant.Id);
+            Unit.Restaurant = restaurant;
+            var unitType = _context.UnitType.Find(Unit.UnitType.Id);
+            Unit.UnitType =unitType;
 
             _context.Unit.Add(Unit);
             _context.SaveChanges();

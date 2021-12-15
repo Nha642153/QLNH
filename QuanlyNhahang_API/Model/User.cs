@@ -27,9 +27,6 @@ namespace QuanlyNhahang_API.Model
         [NotMapped]
         public IEnumerable<User> UpdatedUser { get; set; }
 
-        public static implicit operator User(Catogory v)
-        {
-            throw new NotImplementedException();
-        }
+      
     }
 }

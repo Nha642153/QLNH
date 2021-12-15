@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using QuanlyNhahang_API.Data;
 
 namespace QuanlyNhahang_API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211127093713_DB2.8")]
+    partial class DB28
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -146,9 +148,6 @@ namespace QuanlyNhahang_API.Migrations
                     b.Property<DateTime>("Created")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("CreatedUserId")
-                        .HasColumnType("int");
-
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
@@ -157,9 +156,6 @@ namespace QuanlyNhahang_API.Migrations
 
                     b.Property<double>("Discount")
                         .HasColumnType("float");
-
-                    b.Property<int?>("ItemImageId")
-                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -170,26 +166,17 @@ namespace QuanlyNhahang_API.Migrations
                     b.Property<int>("Quatity")
                         .HasColumnType("int");
 
-                    b.Property<int?>("RestaurantId")
+                    b.Property<int?>("UnitId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Updated")
                         .HasColumnType("datetime2");
 
-                    b.Property<int?>("UpdatedUserId")
-                        .HasColumnType("int");
-
                     b.HasKey("Id");
 
                     b.HasIndex("CategoryId");
 
-                    b.HasIndex("CreatedUserId");
-
-                    b.HasIndex("ItemImageId");
-
-                    b.HasIndex("RestaurantId");
-
-                    b.HasIndex("UpdatedUserId");
+                    b.HasIndex("UnitId");
 
                     b.ToTable("Item");
                 });
@@ -213,8 +200,11 @@ namespace QuanlyNhahang_API.Migrations
                     b.Property<bool>("Deleted")
                         .HasColumnType("bit");
 
-                    b.Property<string>("Description")
+                    b.Property<string>("Dessription")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
@@ -228,6 +218,8 @@ namespace QuanlyNhahang_API.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("CreatedUserId");
+
+                    b.HasIndex("ItemId");
 
                     b.HasIndex("UpdatedUserId");
 
@@ -634,31 +626,13 @@ namespace QuanlyNhahang_API.Migrations
                         .WithMany()
                         .HasForeignKey("CategoryId");
 
-                    b.HasOne("QuanlyNhahang_API.Model.User", "CreatedUser")
+                    b.HasOne("QuanlyNhahang_API.Model.Unit", "Unit")
                         .WithMany()
-                        .HasForeignKey("CreatedUserId");
-
-                    b.HasOne("QuanlyNhahang_API.Model.ItemImage", "ItemImage")
-                        .WithMany()
-                        .HasForeignKey("ItemImageId");
-
-                    b.HasOne("QuanlyNhahang_API.Model.Restaurant", "Restaurant")
-                        .WithMany()
-                        .HasForeignKey("RestaurantId");
-
-                    b.HasOne("QuanlyNhahang_API.Model.User", "UpdatedUser")
-                        .WithMany()
-                        .HasForeignKey("UpdatedUserId");
+                        .HasForeignKey("UnitId");
 
                     b.Navigation("Category");
 
-                    b.Navigation("CreatedUser");
-
-                    b.Navigation("ItemImage");
-
-                    b.Navigation("Restaurant");
-
-                    b.Navigation("UpdatedUser");
+                    b.Navigation("Unit");
                 });
 
             modelBuilder.Entity("QuanlyNhahang_API.Model.ItemImage", b =>
@@ -667,11 +641,17 @@ namespace QuanlyNhahang_API.Migrations
                         .WithMany()
                         .HasForeignKey("CreatedUserId");
 
+                    b.HasOne("QuanlyNhahang_API.Model.Item", "Item")
+                        .WithMany("ItemImages")
+                        .HasForeignKey("ItemId");
+
                     b.HasOne("QuanlyNhahang_API.Model.User", "UpdatedUser")
                         .WithMany()
                         .HasForeignKey("UpdatedUserId");
 
                     b.Navigation("CreatedUser");
+
+                    b.Navigation("Item");
 
                     b.Navigation("UpdatedUser");
                 });
@@ -774,6 +754,11 @@ namespace QuanlyNhahang_API.Migrations
                         .HasForeignKey("RoleId");
 
                     b.Navigation("Role");
+                });
+
+            modelBuilder.Entity("QuanlyNhahang_API.Model.Item", b =>
+                {
+                    b.Navigation("ItemImages");
                 });
 
             modelBuilder.Entity("QuanlyNhahang_API.Model.Order", b =>

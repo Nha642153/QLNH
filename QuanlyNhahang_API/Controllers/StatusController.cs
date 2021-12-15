@@ -86,7 +86,7 @@ namespace QuanlyNhahang_API.Controllers
             }
             status.Name = Status.Name;
             status.Description = Status.Description;
-            status.parentId = Status.parentId;
+           
             status.Deleted = Status.Deleted;
             var updatedUser = _context.User.Find((Status.UpdatedUser != null) ? Status.UpdatedUser.Id : 1);
             status.UpdatedUser = updatedUser;

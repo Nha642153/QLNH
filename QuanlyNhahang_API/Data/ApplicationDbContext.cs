@@ -9,7 +9,8 @@ namespace QuanlyNhahang_API.Data
         public DbSet<User> User { get; set; }
         public DbSet<Item> Item { get; set; }
         public DbSet<ItemImage> ItemImage { get; set; }
-        public DbSet<Catogory> Catogory { get; set; }
+        public DbSet<Category> Category { get; set; }
+        public DbSet<CategoryType> CategoryType { get; set; }
         public DbSet<Guest> Guest { get; set; }
         public DbSet<Table> Table { get; set; }
         public DbSet<Order> Order { get; set; }
@@ -19,6 +20,7 @@ namespace QuanlyNhahang_API.Data
         public DbSet<Unit> Unit { get; set; }
         public DbSet<UnitType> UnitType { get; set; }
         public DbSet<Status> Status { get; set; }
+ 
 
         protected override void OnConfiguring(DbContextOptionsBuilder options)
         {

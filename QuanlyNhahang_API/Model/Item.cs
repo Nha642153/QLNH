@@ -16,9 +16,11 @@ namespace QuanlyNhahang_API.Model
         public DateTime Created { get; set; }
         public DateTime Updated { get; set; }
         public bool Deleted { get; set; }
-        public virtual Unit Unit { get; set; }
-        public virtual Catogory Catogory { get; set; }
-        public virtual IList<ItemImage> ItemImages { get; set; }
+        public virtual Restaurant Restaurant { get; set; }
+        public virtual User CreatedUser { get; set; }
+        public virtual User UpdatedUser { get; set; }
+        public virtual Category Category { get; set; }
+        public virtual ItemImage ItemImage { get; set; }
 
     }
 }
