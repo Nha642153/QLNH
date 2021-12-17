@@ -1,6 +1,6 @@
 import { HttpEvent, HttpEventType } from '@angular/common/http';
 import { LeadingComment, ThrowStmt } from '@angular/compiler';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Pipe } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ActivatedRoute, Router } from '@angular/router';
 
@@ -14,8 +14,9 @@ import { Item } from '../model/item';
   templateUrl: './image.component.html',
   styleUrls: ['./image.component.scss']
 })
-export class ImageComponent implements OnInit {
 
+export class ImageComponent implements OnInit {
+ 
   public uploadedFiles:any[]=[];
   private reader:FileReader|undefined;
   private fileBuffer:any;

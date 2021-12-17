@@ -44,11 +44,11 @@
         </p-carousel>
     </div> -->
 
-  <div *ngFor="let imagePath of img">
-    <p-card  [style]="{'width': '250px', 'margin-bottom': '2em'}">
-        <ng-template pTemplate="header">
+  <div *ngFor="let imagePath of img.slice().reverse()"  >
+    <p-card [style]="{'width': '250px', 'margin-bottom': '2em'}">
+        <ng-template pTemplate="header"  >
             <span *ngIf="loading">Đang tải ảnh</span>
-            <img *ngIf="!loading" [src]="imagePath" width="50px"/>
+            <img  *ngIf="!loading" [src]="imagePath" width="50px"/>
         </ng-template>
 
     </p-card>
